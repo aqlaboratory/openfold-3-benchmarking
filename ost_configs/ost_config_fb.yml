@@ -1,0 +1,7 @@
+mode: "protein_protein"
+
+n_processes: 96
+chunksize: 1
+
+ref_ext: "cif"
+skip_existing: false

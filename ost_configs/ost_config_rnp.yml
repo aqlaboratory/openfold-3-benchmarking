@@ -1,0 +1,10 @@
+mode: "protein_ligand"
+
+n_processes: 96
+chunksize: 1
+
+lddt_pli: true
+rmsd: true
+use_amc: true
+ref_ext: "cif"
+skip_existing: false

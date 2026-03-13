@@ -1,0 +1,59 @@
+pl_trainer_args:
+  flux_plugin: true
+  precision: 32-true
+
+experiment_settings:
+  skip_existing: true
+
+model_update:
+  presets:
+    - predict
+    - low_mem
+  custom:
+    architecture:
+      shared:
+        num_recycles: 10
+      heads:
+        pae:
+          enabled: true
+      msa:
+        msa_module_embedder:
+          subsample_main_msa: False
+          subsample_all_msa: True
+
+output_writer_settings:
+  structure_format: cif
+
+data_module_args:
+  num_workers: 1 
+
+dataset_config_kwargs:
+  msa:
+    max_seq_counts:  
+      uniprot_hits: 50000
+      mgnify_hits: 5000
+      uniref90_hits: 10000
+      bfd_hits: 100000000
+      cfdb_hits: 10000000
+      bfd_uniref_hits: 10000000
+      rfam_hits: 10000
+      rnacentral_hits: 10000
+      nt_hits: 10000
+      nucleotide_collection_hits: 10000
+    msas_to_pair: ["uniprot_hits"]
+    aln_order:
+      - uniref90_hits
+      - bfd_hits
+      - cfdb_hits
+      - bfd_uniref_hits
+      - mgnify_hits
+      - rfam_hits
+      - rnacentral_hits
+      - nt_hits
+      - nucleotide_collection_hits
+    subsample_main: False
+  template:
+    take_top_k: True
+
+template_preprocessor_settings:
+  cache_directory: "benchmark_templates"
